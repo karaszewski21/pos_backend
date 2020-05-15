@@ -30,7 +30,6 @@ export class ProductController {
     product.quantity = body.quantity;
     product.active = body.active;
 
-    console.log(body);
     return await (await this.entityManagerService.getManager()).save(product);
   }
   

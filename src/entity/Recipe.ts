@@ -1,6 +1,7 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, OneToMany, OneToOne} from "typeorm";
 import { Product } from "./Product";
 import { Offer } from "./Offer";
+import { RecipeItem } from "./RecipeItem";
 
 @Entity()
 export class Recipe {
@@ -9,18 +10,13 @@ export class Recipe {
     id: number;
 
     @Column()
-    name: string;
+    name: string = '';
 
     @Column()
     description: string;
 
-    @Column("double")
-    amount_portion: number;
-
-    @ManyToMany(type => Product, product => product.recipe)
-    @JoinTable()
-    product: Product[];
-    
-    @ManyToOne(type => Offer, offer => offer.recipe)
+    @OneToMany(type => RecipeItem, recipeItem => recipeItem.recipe)
+    recipeItems: RecipeItem[];
+    @OneToOne(type => Offer, offer => offer.recipe)
     offer: Offer;
 }

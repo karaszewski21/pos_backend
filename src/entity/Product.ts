@@ -1,5 +1,6 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
 import { Recipe } from "./Recipe";
+import { RecipeItem } from "./RecipeItem";
 
 @Entity()
 export class Product {
@@ -8,7 +9,7 @@ export class Product {
     id: number;
 
     @Column()
-    name: string;
+    name: string= '';
 
     @Column()
     description: string;
@@ -22,6 +23,6 @@ export class Product {
     @Column()
     active: boolean;
 
-    @OneToMany(type => Recipe, recipe => recipe.product)
-    recipe: Recipe[];
+    @OneToMany(type => RecipeItem, recipeItem => recipeItem.product)
+    recipeItems: RecipeItem[];
 }

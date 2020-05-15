@@ -20,7 +20,12 @@ export class OfferController {
   }
 
   @Post('create')
-  async create(@Body() offer: Offer): Promise<Offer> {
+  async create(@Body() bodyOffer: Offer): Promise<Offer> {
+    let offer = new Offer()
+    offer.name = bodyOffer.name
+    offer.quantity = 1
+    offer.description = bodyOffer.description
+    offer.active = bodyOffer.active
 
     return await (await this.entityManagerService.getManager()).save(offer);
   }

@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne} from "typeorm";
 import { Recipe } from "./Recipe";
 
 @Entity()
@@ -19,6 +19,6 @@ export class Offer {
     @Column()
     active: boolean;
 
-    @OneToMany(type => Recipe, recipe => recipe.offer)
-    recipe: Recipe[];
+    @OneToOne(type => Recipe, recipe => recipe.offer)
+    recipe: Recipe;
 }
